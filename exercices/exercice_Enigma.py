@@ -27,6 +27,8 @@
 #
 # Source d'inspiration : Codingame
 
+import string
+
 message = "AAA"
 nombre = 4
 rotor1 = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
@@ -58,8 +60,6 @@ def cesar(char, nombre):
 
 def split(word): 
     return [char for char in word.upper()]
-
-import string
 
 code = enigma(rotor1,rotor2,rotor3,"AAA",4, True)
 print(code)
