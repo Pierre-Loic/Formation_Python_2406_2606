@@ -20,3 +20,17 @@ pop
 reverse
 print
 """
+
+list_1 = list()
+list_1.insert(0, 5)
+list_1.insert(1, 10)
+list_1.insert(0, 6)
+print(list_1)
+list_1.remove(6)
+list_1.append(9)
+list_1.append(1)
+list_1.sort()
+print(list_1)
+list_1.pop()
+list_1.reverse()
+print(list_1)
