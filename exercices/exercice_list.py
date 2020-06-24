@@ -6,7 +6,7 @@
 # de la forme suivante : [["Emma", 20], ...]
 # - Trier la liste par ordre décroissant de notes
 # - Calculer la moyenne des notes
-
+#test
 liste_notes = """
 20
 Emma
