@@ -22,3 +22,5 @@ Raphael
 Léo
 16
 """
+
+print(liste_notes)
