@@ -3,6 +3,7 @@
 ## Ce repository contient deux dossiers :
 - dossier supports : contient les documents de la formation
 - dossier exercices : contient les exercices
+
 Pour répondre aux exercices, vous devez travailler sur la branche de votre prénom. Pour cloner uniquement **votre branche**, tapez la commande suivante :
 `git clone --branch <votre prenom> https://github.com/Pierre-Loic/Formation_Python_2406_2606.git`
 
