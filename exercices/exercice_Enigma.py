@@ -28,7 +28,39 @@
 # Source d'inspiration : Codingame
 
 def encode(rotor1, rotor2, rotor3, message, nombre):
+    A=1
+    B=2
+    C=3
+    D=4
+    E=5
+    F=6
+    G=7
+    H=8
+    J=9
+    K=10
+    L=11
+    M=12
+    N=13
+    O=14
+    P=15
+    Q=16
+    R=17
+    S=18
+    T=19
+    U=20
+    V=21
+    W=22
+    X=23
+    Y=24
+    Z=25
+
+    mot = input("saisir le mot")
+    lettre_1 = mot[1]
+    print(lettre_1)
+    #compteur = x+1
     pass
 
 def decode(rotor1, rotor2, rotor3, message, nombre):
     pass
+
+encode()
