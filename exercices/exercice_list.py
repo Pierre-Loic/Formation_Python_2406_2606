@@ -8,7 +8,6 @@
 # - Calculer la moyenne des notes
 
 liste_notes = """
-20
 Emma
 20
 Gabriel
@@ -22,3 +21,16 @@ Raphael
 Léo
 16
 """
+liste_notes = liste_notes.split()
+print (liste_notes)
+
+ma_liste = liste_notes[1], liste_notes[3] , liste_notes[5] , liste_notes[7] , liste_notes[9] , liste_notes[11]
+ma_liste = list(map(int,ma_liste))
+print (sorted(ma_liste))
+
+
+add = sum(ma_liste)
+print(add)
+moyenne = add/6
+
+print (moyenne)
