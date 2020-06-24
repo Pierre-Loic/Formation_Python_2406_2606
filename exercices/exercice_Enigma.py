@@ -27,8 +27,81 @@
 #
 # Source d'inspiration : Codingame
 
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+rotor1 = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
+rotor2 = "AJDKSIRUXBLHWTMCQGZNPYFVOE"
+rotor3 = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
+
+
+def cesar_encode(message, nombre):
+    list_char = list(message)
+    texte_chiffre = ''
+    for elmt in list_char:
+        new_char = alphabet.find(elmt) + nombre
+        nombre += 1
+        module = int(new_char) % len(alphabet)
+        texte_chiffre = texte_chiffre + str(alphabet[module])
+        pass
+    return texte_chiffre
+
+
+def cesar_decode(message, nombre):
+    list_char = list(message)
+    texte_chiffre = ''
+    for elmt in list_char:
+        new_char = alphabet.find(elmt) - nombre
+        nombre += 1
+        module = int(new_char) % len(alphabet)
+        texte_chiffre = texte_chiffre + str(alphabet[module])
+        pass
+    return texte_chiffre
+
+
+def rotor_encode(message, rotor):
+    list_char = list(message)
+    texte_chiffre = ''
+    for elmt in list_char:
+        new_char = alphabet.find(elmt)
+        module = int(new_char) % len(rotor)
+        texte_chiffre = texte_chiffre + str(rotor[module])
+        pass
+    return texte_chiffre
+
+
+def rotor_decode(message, rotor):
+    list_char = list(message)
+    texte_chiffre = ''
+    for elmt in list_char:
+        new_char = rotor.find(elmt)
+        module = int(new_char) % len(alphabet)
+        texte_chiffre = texte_chiffre + str(alphabet[module])
+        pass
+    return texte_chiffre
+
+
 def encode(rotor1, rotor2, rotor3, message, nombre):
-    pass
+    message = cesar_encode(message, nombre)
+    print(message)
+    message = rotor_encode(message, rotor1)
+    print(message)
+    message = rotor_encode(message, rotor2)
+    print(message)
+    message = rotor_encode(message, rotor3)
+    print(message)
+    return message
+
 
 def decode(rotor1, rotor2, rotor3, message, nombre):
-    pass
+    message = rotor_decode(message, rotor3)
+    print(message)
+    message = rotor_decode(message, rotor2)
+    print(message)
+    message = rotor_decode(message, rotor1)
+    print(message)
+    message = cesar_decode(message, nombre)
+    print(message)
+    return message
+
+
+mess_1 = encode(rotor1, rotor2, rotor3, "AAA", 4)
+decode(rotor1, rotor2, rotor3, mess_1, 4)
