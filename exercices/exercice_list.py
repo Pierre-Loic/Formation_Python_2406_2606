@@ -9,6 +9,12 @@
 #test
 def takeSecond(elem):
     return elem[1]
+
+def somme(list):
+    somme =0
+    for val in list:
+        somme = somme+int(val)
+    return somme
 liste_notes = """
 Emma
 20
@@ -32,3 +38,5 @@ for i, name in enumerate(liste_eleve):
 
 liste_tot.sort(key=takeSecond, reverse=True)
 print(liste_tot)
+
+print(somme(liste_notes)/len(liste_notes))
