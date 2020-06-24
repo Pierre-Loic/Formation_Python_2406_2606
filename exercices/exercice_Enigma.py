@@ -27,8 +27,44 @@
 #
 # Source d'inspiration : Codingame
 
-def encode(rotor1, rotor2, rotor3, message, nombre):
-    pass
+message = "AAA"
+nombre = 4
+rotor1 = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
+rotor2 = "AJDKSIRUXBLHWTMCQGZNPYFVOE"
+rotor3 = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
 
-def decode(rotor1, rotor2, rotor3, message, nombre):
-    pass
+def enigma(rotor1, rotor2, rotor3, message, nombre, encode):
+    i = nombre
+    result = ""
+    if encode == True :
+        for char in split(message):
+            result += rotor(rotor(rotor(cesar(char,i),rotor1,encode),rotor2,encode),rotor3,encode)
+            i = i + 1
+    else :
+        i = i * -1
+        for char in split(message):
+            result += cesar(rotor(rotor(rotor(char,rotor3,encode),rotor2,encode),rotor1,encode),i)
+            i = i - 1
+    return result
+
+def rotor(char, rotor, encode):
+    if encode == True :
+        return rotor[string.ascii_uppercase.index(char)]
+    else :
+        return string.ascii_uppercase[rotor.index(char)]
+
+def cesar(char, nombre):
+    return string.ascii_uppercase[(string.ascii_uppercase.index(char) + nombre) % 26]
+
+def split(word): 
+    return [char for char in word.upper()]
+
+import string
+
+code = enigma(rotor1,rotor2,rotor3,"AAA",4, True)
+print(code)
+print(enigma(rotor1,rotor2,rotor3,code, 4, False))
+
+code = enigma(rotor1,rotor2,rotor3,"ABC",4,True)
+print(code)
+print(enigma(rotor1,rotor2,rotor3,code,4,False))
