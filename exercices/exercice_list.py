@@ -7,8 +7,9 @@
 # - Trier la liste par ordre décroissant de notes
 # - Calculer la moyenne des notes
 #test
+def takeSecond(elem):
+    return elem[1]
 liste_notes = """
-20
 Emma
 20
 Gabriel
@@ -22,3 +23,12 @@ Raphael
 Léo
 16
 """
+liste_notes = liste_notes.split()
+liste_eleve = liste_notes[0:12:2]
+liste_notes = liste_notes[1:12:2]
+liste_tot =[]
+for i, name in enumerate(liste_eleve):
+    liste_tot.append([name, liste_notes[i]])
+
+liste_tot.sort(key=takeSecond, reverse=True)
+print(liste_tot)
