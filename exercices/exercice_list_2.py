@@ -20,3 +20,31 @@ pop
 reverse
 print
 """
+
+import sys
+
+def Insert(param):
+    liste.insert(int(param[1]),int(param[2]))
+
+def Append(param):
+    liste.append(int(param[1]))
+
+def Remove(param):
+    liste.remove(int(param[1]))
+
+def Sort(param):
+    liste.sort()
+
+def Pop(param):
+    liste.pop()
+
+def Reverse(param):
+    liste.reverse()
+
+def Print(param):
+    print(liste)
+
+liste = []
+for item in actions_liste.strip('\n').split('\n'):
+    getattr(sys.modules[__name__], item.split()[0].capitalize())(item.split())
+
