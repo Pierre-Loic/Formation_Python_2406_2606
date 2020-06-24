@@ -7,9 +7,6 @@
 # - Trier la liste par ordre décroissant de notes
 # - Calculer la moyenne des notes
 #test
-def takeSecond(elem):
-    return elem[1]
-
 def somme(list):
     somme =0
     for val in list:
@@ -36,7 +33,7 @@ liste_tot =[]
 for i, name in enumerate(liste_eleve):
     liste_tot.append([name, liste_notes[i]])
 
-liste_tot.sort(key=takeSecond, reverse=True)
+liste_tot.sort(key=lambda x:x[1], reverse=True)
 print(liste_tot)
 
 print(somme(liste_notes)/len(liste_notes))
