@@ -20,3 +20,19 @@ pop
 reverse
 print
 """
+liste_vide = []
+liste_vide.insert(0, 5)
+liste_vide.insert(1,10)
+liste_vide.insert(0,6)
+
+print (liste_vide)
+
+liste_vide.remove(6)
+liste_vide.append(9)
+liste_vide.append(1)
+
+print(sorted(liste_vide))
+
+print(liste_vide.pop(1))
+
+print(sorted(liste_vide,reverse= True))
