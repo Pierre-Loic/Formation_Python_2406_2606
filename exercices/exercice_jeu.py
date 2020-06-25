@@ -29,7 +29,6 @@ J2 = "0"
 
 
 class Player:
-    player_type = ""
     victory_number = 0
 
     def __init__(self, player_type, victory_number):
@@ -38,10 +37,19 @@ class Player:
 
     def play(self):
         # Get player input
+
         x = input("Entrez l'abscisse compris entre 1 et 3 : ")
-        y = input("Entrez l'ordonnée compris entre 1 et 3 : ")
-        # Check if coord is available
         # Check if beetween 1 and 3
+        while x.isdigit() != True or int(x) > 3 or int(x) < 1:
+            print("Saisie invalide")
+            x = input("Entrez l'abscisse compris entre 1 et 3 : ")
+
+        y = input("Entrez l'ordonnée compris entre 1 et 3 : ")
+        while y.isdigit() != True or int(y) > 3 or int(y) < 1:
+            print("Saisie invalide")
+            y = input("Entrez l'abscisse compris entre 1 et 3 : ")
+
+        # Check if coord is available
         return [x, y]
 
     def print_data(self):
@@ -75,10 +83,18 @@ class Game(Player):
                 if counter == 3:
                     return player
 
-        # Check diag
+        # Check diag 1
+        counter = 0
         for x in range(0, 3):
-            counter = 0
             if self.game_map[x][x] == player:
+                counter += 1
+            if counter == 3:
+                return player
+
+        # Check diag 2
+        counter = 0
+        for x in range(0, 3):
+            if self.game_map[2 - x][x] == player:
                 counter += 1
             if counter == 3:
                 return player
