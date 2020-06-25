@@ -27,8 +27,38 @@
 #
 # Source d'inspiration : Codingame
 
-def encode(rotor1, rotor2, rotor3, message, nombre):
-    pass
+nombre = 4
+rotors = [
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+    "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+    "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+    ]
+message = "ABC"
 
-def decode(rotor1, rotor2, rotor3, message, nombre):
-    pass
+
+def encode(rotors, message, nombre):
+    result = ""
+    for i, letter in enumerate(message):
+        result += rotors[0][(rotors[0].index(letter)+nombre+i)%26]
+    for rotor in rotors[1:]:
+        new_result = ""
+        for i, letter in enumerate(result):
+            new_result += rotor[rotors[0].index(letter)]
+        result = new_result
+    return result
+
+def decode(rotors, message, nombre):
+    result = message
+    for rotor in rotors[:0:-1]:
+        new_result = ""
+        for i, letter in enumerate(result):
+            new_result += rotors[0][rotor.index(letter)]
+        result = new_result
+    new_result = ""
+    for i, letter in enumerate(result):
+        new_result += rotors[0][(rotors[0].index(letter)-nombre-i)%26]
+    return new_result
+
+print(encode(rotors, message, nombre))
+print(decode(rotors, encode(rotors, message, nombre), nombre))
