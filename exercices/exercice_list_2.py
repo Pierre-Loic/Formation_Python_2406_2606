@@ -21,16 +21,23 @@ reverse
 print
 """
 
-list_1 = list()
-list_1.insert(0, 5)
-list_1.insert(1, 10)
-list_1.insert(0, 6)
-print(list_1)
-list_1.remove(6)
-list_1.append(9)
-list_1.append(1)
-list_1.sort()
-print(list_1)
-list_1.pop()
-list_1.reverse()
-print(list_1)
+result = []
+for instruction in actions_liste.split("\n"):
+    temp = instruction.split()
+    if len(temp)>0:
+        if temp[0]=="insert":
+            result.insert(int(temp[1]), int(temp[2]))
+        elif temp[0]=="print":
+            print(result)
+        elif temp[0]=="remove":
+            result.remove(int(temp[1]))
+        elif temp[0]=="append":
+            result.append(int(temp[1]))
+        elif temp[0]=="sort":
+            result.sort()
+        elif temp[0]=="pop":
+            result.pop()
+        elif temp[0]=="reverse":
+            result.reverse()
+        else:
+            print("Erreur")
