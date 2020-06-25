@@ -88,7 +88,10 @@ class TicTacToe:
         if TicTacToe.game_type.upper() == "V":
             TicTacToe.gamers.append(Gamer(input("Nom du joueur 2: "),"O"))  
         else:
-            TicTacToe.gamers.append(Ia("O",1))  
+            botDif = input("Difficulté du bot entre 1 et 2")
+            if botDif.isdigit() and int(botDif) < 3 and int(botDif) > 0:
+                TicTacToe.gamers.append(Ia("O",int(botDif)))  
+        
         print(TicTacToe.gamers[0].gamer_name + " vs " + TicTacToe.gamers[1].gamer_name)
         self.begin_game()
 
@@ -117,36 +120,128 @@ class Gamer:
         print(f"Nom: {self.gamer_name} Nombre de victoire: {self.victory_number}")
 
 class Ia (Gamer):
-    pattern1 = {}
-    pattern2 = {}
-    pattern3 = {}
     def __init__(self, letter, difficult):
         super().__init__("BOT",letter)
         self.difficult = int(difficult)
+        if self.difficult == 2:
+            self.medium = MediumIa(letter)
 
     def setAsPlay(self, val):
         self.asPlay = val
 
     def collect_move(self,game_map):
         print("Tour de l'ordinateur")
-        list_tmp = []
-        for i,val in enumerate(game_map):
-            if val == "_":
-                list_tmp.append(i)
+        
         if self.difficult == 1:
+            list_tmp = []
+            for i,val in enumerate(game_map):
+                if val == "_":
+                    list_tmp.append(i)
             return random.choice(list_tmp)
+        if self.difficult == 2:
+            return self.medium.play(game_map)
+
 
     def print_data(self):
         print(f"Nom: {self.gamer_name} Nombre de victoire: {self.victory_number}")
-    
-    def move(self,game_map):
-        if self.difficult == 1:
+
+            
+
+class MediumIa:
+    pattern = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+    def __init__(self,letter):
+        self.listChoice = []
+        self.listOpponentChoice = []
+        self.letter = letter
+        self.opponentLetter = "O" if self.letter == "X" else "X"
+        self.count = 0
+
+    def play(self, game_map):
+        print("tata")
+        self.game_map = game_map
+        self.trymyChoice = self.checkChoice(self.letter)
+        self.tryOpponentChoice = self.checkChoice(self.opponentLetter)
+        print("tata1")
+        if len(self.trymyChoice) !=0:
+            print("toto")
+            self.listChoice.append(random.choice(self.trymyChoice))
+            return self.listChoice[-1]
+        
+        if len(self.tryOpponentChoice) !=0:
+            self.listChoice.append(random.choice(self.tryOpponentChoice))
+            return self.listChoice[-1]
+        self.opponentChoice()
+        print("tata 2")
+        if self.letter == "X": 
+            #return self.firstPlayer()
             pass
+        else:
+            print("toto")
+            return self.secondPlayer()
+        self.count += 1
 
+    def opponentChoice(self):
+        for i,val in enumerate(self.game_map):
+            if val == self.opponentLetter:
+                self.listOpponentChoice.append(i)
 
+    def firstPlayer(self):
+        if self.count ==0:
+            self.listChoice.append(random.choice([0,2,6,8]))
+            return self.listChoice[-1]
+        if self.count == 1:
+            if self.game_map[4] == self.opponentLetter:
+                if self.listChoice[-1] == 0:
+                    self.listChoice.append(8)
+                if self.listChoice[-1] == 2:
+                    self.listChoice.append(6)
+                if self.listChoice[-1] == 6:
+                    self.listChoice.append(2)
+                if self.listChoice[-1] == 8:
+                    self.listChoice.append(0)
+                return self.listChoice[-1]
+        list_tmp = []
+        for i,val in enumerate(self.game_map):
+            if val == "_":
+                list_tmp.append(i)
+        self.listChoice.append(random.choice(list_tmp))
+        return self.listChoice[-1]
+            
+    def secondPlayer(self):
+        print("toto 2")
+        if self.count == 0:
+            if self.game_map.index(self.opponentLetter) == 4:
+                self.listChoice.append(random.choice([0,2,6,8]))
+                return self.listChoice[-1]
 
+            self.listChoice.append(4)
+            return self.listChoice[-1]
+        if self.count == 1:
+            if self.listChoice[-1] == 4:
+                self.listChoice.append(random.choice(filter(lambda x :x not in [1,3,5,7], self.listOpponentChoice)))
+                print(self.listChoice[-1])
+                #return self.listChoice[-1]
 
+        list_tmp = []
+        for i,val in enumerate(self.game_map):
+            if val == "_":
+                list_tmp.append(i)
+        self.listChoice.append(random.choice(list_tmp))
+        return self.listChoice[-1]
 
+    def checkChoice(self,letter):
+        tmpList = []
+        for pattern in MediumIa.pattern:
+            if letter == self.game_map[pattern[0]-1]:
+                if letter == self.game_map[pattern[1]-1]:
+                    if "_" == self.game_map[pattern[2]-1]:
+                        tmpList.append(pattern[2]-1)
+            
+            if letter == self.game_map[pattern[2]-1]:
+                if letter == self.game_map[pattern[1]-1]:
+                    if "_" == self.game_map[pattern[0]-1]:
+                        tmpList.append(pattern[0]-1)
 
+        return tmpList
 game = TicTacToe()
 game.start_game()
