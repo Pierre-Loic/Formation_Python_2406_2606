@@ -35,28 +35,12 @@ class Player:
         self.player_type = player_type
         self.victory_number = victory_number
 
-    def play(self):
-        # Get player input
-
-        x = input("Entrez l'abscisse compris entre 1 et 3 : ")
-        # Check if beetween 1 and 3
-        while x.isdigit() != True or int(x) > 3 or int(x) < 1:
-            print("Saisie invalide")
-            x = input("Entrez l'abscisse compris entre 1 et 3 : ")
-
-        y = input("Entrez l'ordonnée compris entre 1 et 3 : ")
-        while y.isdigit() != True or int(y) > 3 or int(y) < 1:
-            print("Saisie invalide")
-            y = input("Entrez l'abscisse compris entre 1 et 3 : ")
-
-        return [x, y]
-
     def print_data(self):
         pass
     pass
 
 
-class Game(Player):
+class Game:
 
     game_map = list()
 
@@ -140,12 +124,12 @@ class Game(Player):
 
             print("Joueur " + player_type + " à vous de jouer !")
             # Update game map data
-            coord = Player.play(self)
+            coord = self.play()
 
             # Check if coord is available
             if self.game_map[int(coord[0]) - 1][int(coord[1]) - 1] != '-':
                 print("La case est déjà occupé")
-                coord = Player.play(self)
+                coord = self.play()
 
             self.game_map[int(coord[0]) - 1][int(coord[1]) - 1] = player_type
             self.print_map()
@@ -181,7 +165,25 @@ class Game(Player):
             chx = input("Voulez vous rejouer ? (o)")
             pass
         pass
+
+    def play(self):
+        # Get player input
+
+        x = input("Entrez l'abscisse compris entre 1 et 3 : ")
+        # Check if beetween 1 and 3
+        while x.isdigit() != True or int(x) > 3 or int(x) < 1:
+            print("Saisie invalide")
+            x = input("Entrez l'abscisse compris entre 1 et 3 : ")
+
+        y = input("Entrez l'ordonnée compris entre 1 et 3 : ")
+        while y.isdigit() != True or int(y) > 3 or int(y) < 1:
+            print("Saisie invalide")
+            y = input("Entrez l'abscisse compris entre 1 et 3 : ")
+
+        return [x, y]
+
     pass
+
 
 
 # Launch game and init player
