@@ -49,7 +49,6 @@ class Player:
             print("Saisie invalide")
             y = input("Entrez l'abscisse compris entre 1 et 3 : ")
 
-        # Check if coord is available
         return [x, y]
 
     def print_data(self):
@@ -121,6 +120,7 @@ class Game(Player):
         pass
 
     def print_map(self):
+        print("-----------------------------------------")
         for x in range(0, 3):
             for y in range(0, 3):
                 print("|", end="")
@@ -141,6 +141,12 @@ class Game(Player):
             print("Joueur " + player_type + " à vous de jouer !")
             # Update game map data
             coord = Player.play(self)
+
+            # Check if coord is available
+            if self.game_map[int(coord[0]) - 1][int(coord[1]) - 1] != '-':
+                print("La case est déjà occupé")
+                coord = Player.play(self)
+
             self.game_map[int(coord[0]) - 1][int(coord[1]) - 1] = player_type
             self.print_map()
 
