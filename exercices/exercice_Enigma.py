@@ -119,16 +119,12 @@ alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 listRotor1 = list("BDFHJLCPRTXVZNYEIWGAKMUSQO")
 listRotor2 = list("AJDKSIRUXBLHWTMCQGZNPYFVOE")
 listRotor3 = list("EKMFLGDQVZNTOWYHXUSPAIBRCJ")
-#pas necessaire
-dictRotor1 = dict(zip(alphabet,listRotor1))
-dictRotor2 = dict(zip(alphabet,listRotor2))
-dictRotor3 = dict(zip(alphabet,listRotor3))
 
-message = "ABC"
-decodeMessage = ""
+message = "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+decodeMessage = "KFD"
 nombre = 4
 messageEncoder = encode(listRotor1,listRotor2,listRotor3,message,nombre)
-decodeMessage = messageEncoder
+#decodeMessage = messageEncoder
 print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 messageDecoder = decode(listRotor1,listRotor2,listRotor3,decodeMessage,nombre)
 
