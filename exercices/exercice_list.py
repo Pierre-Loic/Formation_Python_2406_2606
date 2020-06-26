@@ -6,7 +6,9 @@
 # de la forme suivante : [["Emma", 20], ...]
 # - Trier la liste par ordre décroissant de notes
 # - Calculer la moyenne des notes
-
+print("" )
+print("exo 1 ---------------------------------------------" )
+print("" )
 liste_notes = """
 Emma
 20
@@ -36,4 +38,4 @@ sorted(tableau_note_fin, key=lambda note: note[1])
 
 print("sorted" + str(tableau_note_fin))
 
-print("moyenne" +var/nb_note)
+print("moyenne" + str(var/nb_note))
