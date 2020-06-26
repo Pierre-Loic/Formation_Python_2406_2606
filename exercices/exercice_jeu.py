@@ -22,6 +22,9 @@
 #     - Méthods :
 #         - collect_move
 #         - print_data
+
+import unittest
+
 class TicTacToe :
     game_state = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
@@ -106,6 +109,79 @@ class Player :
         self.player_symbol = symbol[0]
         print("Good choice Ur " + self.player_symbol + " will cut all ur ennemies into pieces")
 
+class Bot (Player) :
+    bot_lvl = ""
+    def getChoice(self,game_state,turn):
+        game_state = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        play_order = [0,8,6,2]
+        b=0
+        if turn % 2 == 0 :
+          if (self.neededWin(game_state) and self.neededBlock(game_state)):
+              self.orderedPlay()
+        else:
+            if (self.neededWin(game_state) and self.neededBlock(game_state)):
+                self.orderedPlay()
+
+    def orderedPlay(self, game_state):
+        exit = 0
+        for i in range(0, 8):
+            if game_state[i] == " " and exit == 0:
+                game_state[i] = self.player_symbol
+                exit = 1
+
+    def randomPlay(self, game_state):
+        pass
+
+    def perfectPlayOnFirstPlay(self, game_state):
+        pass
+
+    def perfectPlayOnSecondPlay(self, game_state):
+        pass
+
+    def neededBlock(self, game_state):
+        if (game_state[0] != self.player_symbol) and (game_state[0] == " " and (game_state[0] == game_state[1] ) ):
+            game_state[2] = self.player_symbol
+            return False
+        elif (game_state[1] != self.player_symbol) and (game_state[1] == " " and (game_state[2] == game_state[1] ) ):
+            game_state[0] = self.player_symbol
+            return False
+        elif (game_state[0] != self.player_symbol) and (game_state[0] == " " and (game_state[2] == game_state[0] ) ):
+            game_state[1] = self.player_symbol
+            return False
+        else : return True
+
+    def neededWin(self, game_state):
+        if (game_state[1] == game_state[2]) and (game_state[1] == self.player_symbol):
+            game_state[0] = self.player_symbol
+            return False
+        elif (game_state[0] == game_state[2]) and (game_state[1] == self.player_symbol):
+            game_state[1] = self.player_symbol
+            return False
+        elif (game_state[0] == game_state[1]) and (game_state[1] == self.player_symbol):
+            game_state[2] = self.player_symbol
+            return False
+
+        else :
+            return True
+
+
+
+class TestStringMethods(unittest.TestCase):
+
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+        self.assertFalse('Foo'.isupper())
+
+    def test_split(self):
+        s = 'hello world'
+        self.assertEqual(s.split(), ['hello', 'world'])
+        # check that s.split fails when the separator is not a string
+        with self.assertRaises(TypeError):
+            s.split(2)
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -116,6 +192,10 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+if __name__ == "__main__":
+    TestStringMethods()
+    print("Everything passed")
 
 print(bcolors.OKBLUE + "The first challenger is Here" + bcolors.ENDC)
 input(bcolors.OKGREEN + "Press enter V "               + bcolors.ENDC)
@@ -149,9 +229,16 @@ while game_cont :
 
 
     if turn % 2 == 0:
-        varGame.askForPlay(varPlayer1)
+        if varPlayer1.player_name == "BOT":
+            varGame.askForPlay(varPlayer1)
+        else :
+            varGame.askForPlay(varPlayer1)
     else :
-        varGame.askForPlay(varPlayer2)
+        if varPlayer2.player_name == "BOT":
+            varGame.askForPlay(varPlayer2)
+        else :
+            varGame.askForPlay(varPlayer2)
+
 
     varGame.printTicTacToe()
     print(varGame.checkPLayable())
